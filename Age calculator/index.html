@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Age:calculate the age</title>
+</head>
+<body>
+    <main>
+        <h1>Age calculator</h1>
+        <div class="current"></div>
+        <label for="date">Enter the age :</label>
+        <input type="text" name="date" id="dateInput" placeholder="dd/mm/yyyy">
+        <input class="submit" type="submit" value="Enter" disabled>
+        <div class="age"></div>
+    </main>
+    <script>
+        let curr = document.querySelector(".current");
+        let month = new Date().getMonth() + 1; 
+        let year = new Date().getFullYear();
+        let day = new Date().getDate(); 
+        curr.innerHTML = day + "/" + month + "/" + year;
+    
+        let submit = document.querySelector(".submit");
+        let inputdate = document.querySelector("#dateInput");
+    
+        inputdate.addEventListener('input', function() {
+            if (inputdate.value.trim() !== '') {
+                submit.removeAttribute("disabled");
+            } else {
+                submit.setAttribute("disabled", "disabled");
+            }
+        });
+    
+        submit.addEventListener('click', function() {
+            let dob = new Date(inputdate.value);
+            let today = new Date();
+    
+            // Calculate age
+            let age = today.getFullYear() - dob.getFullYear();
+            let monthDiff = today.getMonth() - dob.getMonth();
+            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+                age--;
+            }
+    
+            let ageDisplay = document.querySelector(".age");
+            ageDisplay.innerHTML = "Age: " + age;
+        });
+    </script>
+    
+    
+</body>
+</html>
