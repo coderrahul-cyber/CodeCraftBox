@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Calculator</h1>
+    <main>
+        <div class="inputSection"></div>
+        <div class="numbers">
+             <button class="btn" id="1">1</button>
+             <button class="btn" id="2">2</button>
+             <button class="btn" id="3">3</button>
+             <button class="btn" id="4">4</button>
+             <button class="btn" id="5">5</button>
+             <button class="btn" id="6">6</button>
+             <button class="btn" id="7">7</button>
+             <button class="btn" id="8">8</button>
+             <button class="btn" id="9">9</button>
+             <button class="btn" id="0">0</button>
+             <button class="btn" id=".">.</button>
+             <button class="btn" id="+">+</button>
+             <button class="btn" id="/">/</button>
+             <button class="btn" id="*">*</button>
+             <button class="btn" id="=">=</button>
+             <button class="btn" id="-">-</button>
+             <button class="btn" id="clear">clear</button>
+             <button class="btn" id="delete">Delete</button>  
+        </div>
+    </main>
+    <script>
+        let textArea = document.querySelector('.inputSection');
+        let buttons = Array.from(document.getElementsByClassName("btn")); // Fix this line: remove dot from class name
+
+        buttons.forEach(button => { // Fix this line: use forEach instead of map
+            button.addEventListener('click', e => {
+                switch (e.target.innerText) {
+                    case 'clear':
+                        textArea.innerHTML = '';
+                        break;
+                    case 'Delete':
+                        if (textArea.innerText) {
+                            textArea.innerText = textArea.innerText.slice(0, -1);
+                        }
+                        break;
+                    case '=':
+                        try {
+                            textArea.innerText = eval(textArea.innerText);
+                        } catch {
+                            textArea.innerText = "Error";
+                        }
+                        break; // Add a break statement here
+                    default:
+                        textArea.innerText += e.target.innerHTML;
+                }
+            })
+        })
+    </script>
+</body>
+</html>
